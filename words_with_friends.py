@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from sys import exit, argv
-import enchant
+from enchant import Dict
 from itertools import permutations
 from time import time as time
 
@@ -36,7 +36,7 @@ def length():
 def check_if_word(letters, prefix=None, suffix=None, length=None):
     possibles = []
     count = 0
-    d = enchant.Dict('en_US')
+    d = Dict('en_US')
     time1 = time()
     length_check = len(letters) + 1
     for num in range(2, length_check):
@@ -65,7 +65,21 @@ def check_if_word(letters, prefix=None, suffix=None, length=None):
                 
             check = d.check(str(string))
             if check == True:
-                possibles.append(string)
+                if len(possibles) > 0:
+                    for word in possibles:
+                        if str(string) == str(word):
+                            double = True
+                            break
+                        else:
+                            double = False
+                    if double == True:
+                        pass
+                    elif double == False:
+                        possibles.append(string)
+                        
+                elif len(possibles) == 0:
+                    possibles.append(string)
+                    
             count += 1
             if count == 1000:
                 print('Checked 1,000...')
@@ -93,6 +107,7 @@ def main(argv):
     print('Possible words:')
     for word in _possibles['possibles']:
         print(word)
+    print('\n')
     print('Checked {} permutations ({} seconds)'.format(_possibles['count'], round(_possibles['time'], 5)))
           
 if __name__ == '__main__':
