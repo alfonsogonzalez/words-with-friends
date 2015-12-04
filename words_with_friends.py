@@ -72,9 +72,7 @@ def check_if_word(letters, prefix=None, suffix=None, length=None):
                             break
                         else:
                             double = False
-                    if double == True:
-                        pass
-                    elif double == False:
+                    if double == False:
                         possibles.append(string)
                         
                 elif len(possibles) == 0:
