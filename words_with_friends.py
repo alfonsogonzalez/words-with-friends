@@ -82,14 +82,29 @@ def check_if_word(letters, prefix=None, suffix=None, length=None):
                     
             count += 1
             iterations += 1
+
+            odds = int(uniform(0,2))
+            if odds == 0:
+                quote1 = 'Beep bop boop..'
+            elif odds == 1:
+                quote1 = 'Doing computer stuff'
+
+            odds2 = int(uniform(0,2))
+            if odds2 == 0:
+                quote2 = 'Bop boop beep'
+            if odds2 == 1:
+                quote2 = 'Much computer things wow'
+            
             if count == 1000:
-                print('Beep bop boop..')
+                print(quote1)
             if count == 5000:
-                print('Doing computer stuff...')
+                print(quote2)
             if count == 80000:
                 print('Checked 80,000...')
             if count == 500000:
                 print('Checked 500,000...')
+            if count == 900000:
+                print('Almost done...')
     time2 = time()
     total_time = time2 - time1
     returns = {'possibles': possibles, 'count': count, 'time': total_time, 'iterations':iterations}
