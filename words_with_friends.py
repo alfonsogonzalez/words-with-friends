@@ -4,6 +4,7 @@ from sys import exit, argv
 from enchant import Dict
 from itertools import permutations
 from time import time as time
+from random import uniform
 
 def letters():
     _letters = input('Input letters you have: ')
@@ -36,6 +37,7 @@ def length():
 def check_if_word(letters, prefix=None, suffix=None, length=None):
     possibles = []
     count = 0
+    iterations = 0
     d = Dict('en_US')
     time1 = time()
     length_check = len(letters) + 1
@@ -57,21 +59,21 @@ def check_if_word(letters, prefix=None, suffix=None, length=None):
                 string = prefix
                 string += ''.join(arrangement)
                 string += suffix
-                
-            if length == None:
-                pass
-            else:
+
+            if length != None:
                 string = string[0:length]
                 
             check = d.check(str(string))
             if check == True:
                 if len(possibles) > 0:
                     for word in possibles:
+                        iterations += 1
                         if str(string) == str(word):
                             double = True
                             break
                         else:
                             double = False
+                        
                     if double == False:
                         possibles.append(string)
                         
@@ -79,17 +81,18 @@ def check_if_word(letters, prefix=None, suffix=None, length=None):
                     possibles.append(string)
                     
             count += 1
+            iterations += 1
             if count == 1000:
-                print('Checked 1,000...')
-            if count == 13000:
-                print('Checked 13,000...')
-            if count == 100000:
-                print('Checked 100,000...')
+                print('Beep bop boop..')
+            if count == 5000:
+                print('Doing computer stuff...')
+            if count == 80000:
+                print('Checked 80,000...')
             if count == 500000:
                 print('Checked 500,000...')
     time2 = time()
     total_time = time2 - time1
-    returns = {'possibles': possibles, 'count': count, 'time': total_time}
+    returns = {'possibles': possibles, 'count': count, 'time': total_time, 'iterations':iterations}
     return returns               
 
 def main(argv):
@@ -98,15 +101,20 @@ def main(argv):
     _suffix = suffix()
     _length = length()
     
-    print('Checking all possibles combinations...')
+    print('Checking all possibles combinations...', '\n')
 
     _possibles = check_if_word(letters=_letters, prefix=_prefix, suffix=_suffix, length=_length)
+    
+    if len(_possibles['possibles']) == 0:
+        print('No possible combinations :(')
 
-    print('Possible words:')
-    for word in _possibles['possibles']:
-        print(word)
-    print('\n')
+    else:
+        print('Possible words:')
+        for word in _possibles['possibles']:
+            print(word)
+        
     print('Checked {} permutations ({} seconds)'.format(_possibles['count'], round(_possibles['time'], 5)))
-          
+    print('Iterated through', _possibles['iterations'], 'total combinations')
+    
 if __name__ == '__main__':
     exit(main(argv))
