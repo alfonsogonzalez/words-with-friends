@@ -87,13 +87,13 @@ def check_if_word(letters, prefix=None, suffix=None, length=None):
             if odds == 0:
                 quote1 = 'Beep bop boop..'
             elif odds == 1:
-                quote1 = 'Doing computer stuff'
+                quote1 = 'Doing computer stuff..'
 
             odds2 = int(uniform(0,2))
             if odds2 == 0:
                 quote2 = 'Bop boop beep'
             if odds2 == 1:
-                quote2 = 'Much computer things wow'
+                quote2 = 'Much computer things wow..'
             
             if count == 1000:
                 print(quote1)
