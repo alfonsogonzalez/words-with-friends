@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from sys import exit, argv
+from sys import exit, argv, stdout
 from enchant import Dict
 from itertools import permutations
 from time import time as time
@@ -41,7 +41,7 @@ def check_if_word(letters, prefix=None, suffix=None, length=None):
     d = Dict('en_US')
     time1 = time()
     length_check = len(letters) + 1
-    for num in range(2, length_check):
+    for num in range(4, length_check):
         permute = permutations(letters, num)
         for arrangement in permute:
             if prefix == None and suffix == None:
@@ -83,22 +83,21 @@ def check_if_word(letters, prefix=None, suffix=None, length=None):
             count += 1
             iterations += 1
 
-            odds = int(uniform(0,2))
-            if odds == 0:
-                quote1 = 'Beep bop boop..'
-            elif odds == 1:
-                quote1 = 'Doing computer stuff..'
-
-            odds2 = int(uniform(0,2))
-            if odds2 == 0:
-                quote2 = 'Bop boop beep'
-            if odds2 == 1:
-                quote2 = 'Much computer things wow..'
-            
             if count == 1000:
+                quotes_1 = ['Beep bop boop..', 'Doing computer stuff..', 'Such fast, very computer..']
+                quote1 = quotes_1[int(uniform(0,3))]
                 print(quote1)
+                
             if count == 5000:
+                quotes_2 = ['Bop boop beep..', 'Insert computer noises here..', 'Much computer things, wow..']
+                quote2 = quotes_2[int(uniform(0,3))] 
                 print(quote2)
+                
+            if count == 49000:
+                quotes_3 = ['very computer..', 'doge would be proud', 'froge is the future']
+                quote3 = quotes_3[int(uniform(0,3))]
+                print(quote3)
+                
             if count == 80000:
                 print('Checked 80,000...')
             if count == 500000:
@@ -130,6 +129,7 @@ def main(argv):
         
     print('Checked {} permutations ({} seconds)'.format(_possibles['count'], round(_possibles['time'], 5)))
     print('Iterated through', _possibles['iterations'], 'total combinations')
+    print('\n')
     
 if __name__ == '__main__':
     exit(main(argv))
