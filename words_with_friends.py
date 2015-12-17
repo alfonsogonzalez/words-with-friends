@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from sys import exit, argv, stdout
+from sys import exit, argv
 from enchant import Dict
 from itertools import permutations
 from time import time as time
@@ -97,13 +97,7 @@ def check_if_word(letters, prefix=None, suffix=None, length=None):
                 quotes_3 = ['very computer..', 'doge would be proud', 'froge is the future']
                 quote3 = quotes_3[int(uniform(0,3))]
                 print(quote3)
-                
-            if count == 80000:
-                print('Checked 80,000...')
-            if count == 500000:
-                print('Checked 500,000...')
-            if count == 900000:
-                print('Almost done...')
+
     time2 = time()
     total_time = time2 - time1
     returns = {'possibles': possibles, 'count': count, 'time': total_time, 'iterations':iterations}
@@ -126,9 +120,11 @@ def main(argv):
         print('Possible words:')
         for word in _possibles['possibles']:
             print(word)
+    print('\n')
         
-    print('Checked {} permutations ({} seconds)'.format(_possibles['count'], round(_possibles['time'], 5)))
-    print('Iterated through', _possibles['iterations'], 'total combinations')
+    print('Permutations checked: ', _possibles['count'])
+    print('Total iterations: ', _possibles['iterations'])
+    print('Total time (seconds): ', round(_possibles['time'], 5))
     print('\n')
     
 if __name__ == '__main__':
