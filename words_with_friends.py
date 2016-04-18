@@ -6,6 +6,12 @@ from itertools import permutations
 from time import time
 from random import uniform
 
+class Info:
+    def __init__(self, possibles, count, total_time, iterations):
+        self.possibles = possibles
+        self.count = count
+        self.total_time = total_time
+        self.iterations = iterations
 
 def letters():
     _letters = input('Input letters you have: ')
@@ -101,16 +107,11 @@ def check_if_word(letters, prefix=None, suffix=None, length=None):
 
     time2 = time()
     total_time = time2 - time1
-    returns = {'possibles': possibles, 'count': count, 'time': total_time, 'iterations':iterations}
-    return returns               
 
-class Info:
-    def __init__(self, possibles, count, time_elapsed, iterations):
-        self.possbles = possibles
-	self.count = count
-	self.time_elapsed = time_elapsed
-	self.iterations = iterations	
-
+    info = Info(possibles, count, total_time, iterations)
+    return info
+    #returns = {'possibles': possibles, 'count': count, 'time': total_time, 'iterations':iterations}
+    #return returns               
 
 def main(argv):
     _prefix = prefix()
@@ -122,18 +123,18 @@ def main(argv):
 
     _possibles = check_if_word(letters=_letters, prefix=_prefix, suffix=_suffix, length=_length)
     
-    if len(_possibles['possibles']) == 0:
+    if len(_possibles.possibles) == 0:
         print('No possible combinations :(')
 
     else:
         print('Possible words:')
-        for word in _possibles['possibles']:
+        for word in _possibles.possibles:
             print(word)
     print()
         
-    print('Permutations checked: ', _possibles['count'])
-    print('Total iterations: ', _possibles['iterations'])
-    print('Total time (seconds): ', round(_possibles['time'], 5))
+    print('Permutations checked: ', _possibles.count)
+    print('Total iterations: ', _possibles.iterations)
+    print('Total time (seconds): ', round(_possibles.time, 5))
     print()
     
 if __name__ == '__main__':
