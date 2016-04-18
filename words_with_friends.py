@@ -3,8 +3,9 @@
 from sys import exit, argv
 from enchant import Dict
 from itertools import permutations
-from time import time as time
+from time import time
 from random import uniform
+
 
 def letters():
     _letters = input('Input letters you have: ')
@@ -103,13 +104,21 @@ def check_if_word(letters, prefix=None, suffix=None, length=None):
     returns = {'possibles': possibles, 'count': count, 'time': total_time, 'iterations':iterations}
     return returns               
 
+class Info:
+    def __init__(self, possibles, count, time_elapsed, iterations):
+        self.possbles = possibles
+	self.count = count
+	self.time_elapsed = time_elapsed
+	self.iterations = iterations	
+
+
 def main(argv):
     _prefix = prefix()
     _letters = letters()
     _suffix = suffix()
     _length = length()
     
-    print('Checking all possibles combinations...', '\n')
+    print('Checking all possibles combinations...\n')
 
     _possibles = check_if_word(letters=_letters, prefix=_prefix, suffix=_suffix, length=_length)
     
@@ -120,12 +129,12 @@ def main(argv):
         print('Possible words:')
         for word in _possibles['possibles']:
             print(word)
-    print('\n')
+    print()
         
     print('Permutations checked: ', _possibles['count'])
     print('Total iterations: ', _possibles['iterations'])
     print('Total time (seconds): ', round(_possibles['time'], 5))
-    print('\n')
+    print()
     
 if __name__ == '__main__':
     exit(main(argv))
