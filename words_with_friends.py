@@ -109,9 +109,7 @@ def check_if_word(letters, prefix=None, suffix=None, length=None):
     total_time = time2 - time1
 
     info = Info(possibles, count, total_time, iterations)
-    return info
-    #returns = {'possibles': possibles, 'count': count, 'time': total_time, 'iterations':iterations}
-    #return returns               
+    return info              
 
 def main(argv):
     _prefix = prefix()
