@@ -41,7 +41,7 @@ def length():
     else:
         return None
     
-def check_if_word(letters, prefix=None, suffix=None, length=None):
+def check_word(letters, prefix=None, suffix=None, length=None):
     possibles = []
     count = 0
     iterations = 0
@@ -71,7 +71,7 @@ def check_if_word(letters, prefix=None, suffix=None, length=None):
                 string = string[0:length]
                 
             check = d.check(str(string))
-            if check == True:
+            if check:
                 if len(possibles) > 0:
                     for word in possibles:
                         iterations += 1
@@ -81,7 +81,7 @@ def check_if_word(letters, prefix=None, suffix=None, length=None):
                         else:
                             double = False
                         
-                    if double == False:
+                    if not double:
                         possibles.append(string)
                         
                 elif len(possibles) == 0:
@@ -119,7 +119,7 @@ def main(argv):
     
     print('Checking all possibles combinations...\n')
 
-    _possibles = check_if_word(letters=_letters, prefix=_prefix, suffix=_suffix, length=_length)
+    _possibles = check_word(letters=_letters, prefix=_prefix, suffix=_suffix, length=_length)
     
     if len(_possibles.possibles) == 0:
         print('No possible combinations :(')
